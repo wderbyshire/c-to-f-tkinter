@@ -24,13 +24,20 @@ class TemperatureConverture(tk.Tk):
         self.convert_button = tk.Button(
             self,
             text="Convert",
-            font=(PRIMARY_FAMILY, LABEL_SIZE)
+            font=(PRIMARY_FAMILY, LABEL_SIZE),
+            command=self.convert_temp
         )
 
         self.convert_button.grid(row=2, column=2, sticky=tk.NSEW, padx=5, pady=5)
 
         self.rowconfigure([0, 1, 2], weight=1)
         self.columnconfigure([0, 1, 2], weight=1)
+
+    def convert_temp(self):
+        if self.temp_input.get() == "":
+            print("No input")
+        else:
+            print(round((float(self.temp_input.get()) * (9/5)) + 32, 1))
 
 
 class TemperatureInput(tk.Entry):
