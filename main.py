@@ -1,5 +1,6 @@
 import tkinter as tk
 from settings import *
+import utils
 
 
 class TemperatureConverture(tk.Tk):
@@ -28,13 +29,12 @@ class TemperatureInput(tk.Entry):
     def __init__(self):
         super().__init__()
 
-        self.default_input_string = "Type your temperature here"
-        self.input_variable = tk.StringVar(value=self.default_input_string)
+        self.input_variable = tk.StringVar()
         self.configure(font=(PRIMARY_FAMILY, PRIMARY_SIZE),
                        textvariable=self.input_variable,
-                       foreground=INACTIVE_TEXT_COLOR)
-
-
+                       foreground=INACTIVE_TEXT_COLOR,
+                       validate="key",
+                       validatecommand=(self.register(utils.check_float), "%P"))
 
 
 if __name__ == "__main__":
