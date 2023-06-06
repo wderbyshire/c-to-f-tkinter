@@ -1,6 +1,7 @@
 import tkinter as tk
 from settings import *
 import utils
+from PIL import Image, ImageTk
 
 
 class TemperatureConverture(tk.Tk):
@@ -11,12 +12,15 @@ class TemperatureConverture(tk.Tk):
         self.title(ROOT_TITLE)
         self.iconbitmap(default="app-icon.ico")
 
+        self.c_to_f = True
+
         self.temp_input = TemperatureInput()
         self.temp_input.grid(column=0, columnspan=2, row=1, sticky=tk.NSEW, padx=5)
 
+        self.input_label_sv = tk.StringVar(value="Temperature (C)")
         self.input_label = tk.Label(
             font=(PRIMARY_FAMILY, LABEL_SIZE),
-            text="Temperature (C)",
+            textvariable=self.input_label_sv,
             anchor="sw",
         )
         self.input_label.grid(column=0, columnspan=2, row=0, sticky=tk.NSEW, padx=5, pady=5)
@@ -30,13 +34,24 @@ class TemperatureConverture(tk.Tk):
 
         self.convert_button.grid(row=2, column=2, sticky=tk.NSEW, padx=5, pady=5)
 
+        self.output_label_sv = tk.StringVar(value="Result (F)")
         self.output_label = tk.Label(
             font=(PRIMARY_FAMILY, LABEL_SIZE),
-            text="Result (F)",
+            textvariable=self.output_label_sv,
             anchor="sw",
         )
 
         self.output_label.grid(row=0, column=2, sticky=tk.NSEW, padx=5, pady=5)
+
+        raw_image = Image.open("refresh.png")
+        resized_image = raw_image.resize((10, 10), Image.LANCZOS)
+        self.button_image = ImageTk.PhotoImage(resized_image)
+        self.swap_conversion = tk.Button(
+            self,
+            image=self.button_image,
+            command=self.swap_conversion
+        )
+        self.swap_conversion.grid(row=2, column=1, sticky=tk.NSEW, padx=5, pady=5)
 
         self.output_variable = tk.StringVar()
         self.output = tk.Label(
@@ -53,8 +68,22 @@ class TemperatureConverture(tk.Tk):
         if self.temp_input.get() == "":
             self.output_variable.set("0°")
         else:
-            answer = round((float(self.temp_input.get()) * (9/5)) + 32, 1)
+            if self.c_to_f:
+                answer = round((float(self.temp_input.get()) * (9/5)) + 32, 1)
+            else:
+                answer = round((float(self.temp_input.get()) - 32) * (5/9), 1)
+
             self.output_variable.set(str(answer) + "°")
+
+    def swap_conversion(self):
+        if self.c_to_f:
+            self.input_label_sv.set("Temperature (F)")
+            self.output_label_sv.set("Result (C)")
+            self.c_to_f = False
+        else:
+            self.input_label_sv.set("Temperature (C)")
+            self.output_label_sv.set("Result (F)")
+            self.c_to_f = True
 
 
 class TemperatureInput(tk.Entry):
