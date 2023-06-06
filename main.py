@@ -1,6 +1,7 @@
 import tkinter as tk
 from settings import *
 import utils
+from PIL import Image, ImageTk
 
 
 class TemperatureConverture(tk.Tk):
@@ -37,6 +38,15 @@ class TemperatureConverture(tk.Tk):
         )
 
         self.output_label.grid(row=0, column=2, sticky=tk.NSEW, padx=5, pady=5)
+
+        raw_image = Image.open("refresh.png")
+        resized_image = raw_image.resize((10, 10), Image.LANCZOS)
+        self.button_image = ImageTk.PhotoImage(resized_image)
+        self.swap_conversion = tk.Button(
+            self,
+            image=self.button_image,
+        )
+        self.swap_conversion.grid(row=2, column=1, sticky=tk.NSEW, padx=5, pady=5)
 
         self.output_variable = tk.StringVar()
         self.output = tk.Label(
