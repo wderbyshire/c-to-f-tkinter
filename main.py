@@ -15,9 +15,10 @@ class TemperatureConverture(tk.Tk):
         self.temp_input = TemperatureInput()
         self.temp_input.grid(column=0, columnspan=2, row=1, sticky=tk.NSEW, padx=5)
 
+        self.input_label_sv = tk.StringVar(value="Temperature (C)")
         self.input_label = tk.Label(
             font=(PRIMARY_FAMILY, LABEL_SIZE),
-            text="Temperature (C)",
+            textvariable=self.input_label_sv,
             anchor="sw",
         )
         self.input_label.grid(column=0, columnspan=2, row=0, sticky=tk.NSEW, padx=5, pady=5)
@@ -31,9 +32,10 @@ class TemperatureConverture(tk.Tk):
 
         self.convert_button.grid(row=2, column=2, sticky=tk.NSEW, padx=5, pady=5)
 
+        self.output_label_sv = tk.StringVar(value="Result (F)")
         self.output_label = tk.Label(
             font=(PRIMARY_FAMILY, LABEL_SIZE),
-            text="Result (F)",
+            textvariable=self.output_label_sv,
             anchor="sw",
         )
 
