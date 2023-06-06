@@ -30,6 +30,14 @@ class TemperatureConverture(tk.Tk):
 
         self.convert_button.grid(row=2, column=2, sticky=tk.NSEW, padx=5, pady=5)
 
+        self.output_label = tk.Label(
+            font=(PRIMARY_FAMILY, LABEL_SIZE),
+            text="Result (F)",
+            anchor="sw",
+        )
+
+        self.output_label.grid(row=0, column=2, sticky=tk.NSEW, padx=5, pady=5)
+
         self.rowconfigure([0, 1, 2], weight=1)
         self.columnconfigure([0, 1, 2], weight=1)
 
