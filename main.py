@@ -7,6 +7,7 @@ class TemperatureConverture(tk.Tk):
         super().__init__()
 
         self.geometry(GEOMETRY)
+        self.title(ROOT_TITLE)
 
 
 if __name__ == "__main__":
