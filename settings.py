@@ -1,4 +1,4 @@
 # Root app details
 
-GEOMETRY = "500x200"
+GEOMETRY = "300x100"
 ROOT_TITLE = "Temperature Converter"
