@@ -8,6 +8,7 @@ class TemperatureConverture(tk.Tk):
 
         self.geometry(GEOMETRY)
         self.title(ROOT_TITLE)
+        self.iconbitmap(default="app-icon.ico")
 
 
 if __name__ == "__main__":
