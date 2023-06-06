@@ -68,7 +68,11 @@ class TemperatureConverture(tk.Tk):
         if self.temp_input.get() == "":
             self.output_variable.set("0°")
         else:
-            answer = round((float(self.temp_input.get()) * (9/5)) + 32, 1)
+            if self.c_to_f:
+                answer = round((float(self.temp_input.get()) * (9/5)) + 32, 1)
+            else:
+                answer = round((float(self.temp_input.get()) - 32) * (5/9), 1)
+
             self.output_variable.set(str(answer) + "°")
 
     def swap_conversion(self):
@@ -80,6 +84,7 @@ class TemperatureConverture(tk.Tk):
             self.input_label_sv.set("Temperature (C)")
             self.output_label_sv.set("Result (F)")
             self.c_to_f = True
+
 
 class TemperatureInput(tk.Entry):
     def __init__(self):
