@@ -21,6 +21,14 @@ class TemperatureConverture(tk.Tk):
         )
         self.input_label.grid(column=0, columnspan=2, row=0, sticky=tk.NSEW, padx=5, pady=5)
 
+        self.convert_button = tk.Button(
+            self,
+            text="Convert",
+            font=(PRIMARY_FAMILY, LABEL_SIZE)
+        )
+
+        self.convert_button.grid(row=2, column=2, sticky=tk.NSEW, padx=5, pady=5)
+
         self.rowconfigure([0, 1, 2], weight=1)
         self.columnconfigure([0, 1, 2], weight=1)
 
