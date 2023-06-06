@@ -30,14 +30,31 @@ class TemperatureConverture(tk.Tk):
 
         self.convert_button.grid(row=2, column=2, sticky=tk.NSEW, padx=5, pady=5)
 
+        self.output_label = tk.Label(
+            font=(PRIMARY_FAMILY, LABEL_SIZE),
+            text="Result (F)",
+            anchor="sw",
+        )
+
+        self.output_label.grid(row=0, column=2, sticky=tk.NSEW, padx=5, pady=5)
+
+        self.output_variable = tk.StringVar()
+        self.output = tk.Label(
+            font=(PRIMARY_FAMILY, 13, "bold"),
+            textvariable=self.output_variable,
+        )
+
+        self.output.grid(row=1, column=2, sticky=tk.NSEW, padx=5, pady=5)
+
         self.rowconfigure([0, 1, 2], weight=1)
         self.columnconfigure([0, 1, 2], weight=1)
 
     def convert_temp(self):
         if self.temp_input.get() == "":
-            print("No input")
+            self.output_variable.set("0°")
         else:
-            print(round((float(self.temp_input.get()) * (9/5)) + 32, 1))
+            answer = round((float(self.temp_input.get()) * (9/5)) + 32, 1)
+            self.output_variable.set(str(answer) + "°")
 
 
 class TemperatureInput(tk.Entry):
