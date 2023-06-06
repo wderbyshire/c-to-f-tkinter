@@ -12,6 +12,8 @@ class TemperatureConverture(tk.Tk):
         self.title(ROOT_TITLE)
         self.iconbitmap(default="app-icon.ico")
 
+        self.c_to_f = True
+
         self.temp_input = TemperatureInput()
         self.temp_input.grid(column=0, columnspan=2, row=1, sticky=tk.NSEW, padx=5)
 
@@ -47,6 +49,7 @@ class TemperatureConverture(tk.Tk):
         self.swap_conversion = tk.Button(
             self,
             image=self.button_image,
+            command=self.swap_conversion
         )
         self.swap_conversion.grid(row=2, column=1, sticky=tk.NSEW, padx=5, pady=5)
 
@@ -68,6 +71,15 @@ class TemperatureConverture(tk.Tk):
             answer = round((float(self.temp_input.get()) * (9/5)) + 32, 1)
             self.output_variable.set(str(answer) + "°")
 
+    def swap_conversion(self):
+        if self.c_to_f:
+            self.input_label_sv.set("Temperature (F)")
+            self.output_label_sv.set("Result (C)")
+            self.c_to_f = False
+        else:
+            self.input_label_sv.set("Temperature (C)")
+            self.output_label_sv.set("Result (F)")
+            self.c_to_f = True
 
 class TemperatureInput(tk.Entry):
     def __init__(self):
